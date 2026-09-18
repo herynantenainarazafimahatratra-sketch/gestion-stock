@@ -10,19 +10,20 @@
 
         stage('Build') {
             steps {
-                bat 'mvnw.cmd clean package -DskipTests'
+                sh 'chmod +x mvnw'
+                sh './mvnw clean package -DskipTests'
             }
         }
 
         stage('Tests') {
             steps {
-                bat 'mvnw.cmd test'
+                sh './mvnw test'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t gestion-stock-backend .'
+                sh 'docker build -t gestion-stock-backend .'
             }
         }
     }
